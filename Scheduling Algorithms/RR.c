@@ -20,10 +20,10 @@
 //#define WORKLOAD3 100000
 //#define WORKLOAD4 100000
 
-#define QUANTUM1 10
-#define QUANTUM2 10
-#define QUANTUM3 10
-#define QUANTUM4 10
+#define QUANTUM1 6800
+#define QUANTUM2 6800
+#define QUANTUM3 6800
+#define QUANTUM4 6800
 
 
 void myfunction(int param){
