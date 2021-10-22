@@ -16,10 +16,10 @@
 //#define WORKLOAD2 100000
 //#define WORKLOAD3 100000
 //#define WORKLOAD4 100000
-#define QUANTUM1 28750
-#define QUANTUM2 28750
-#define QUANTUM3 28750
-#define QUANTUM4 28750
+#define QUANTUM1 50000
+#define QUANTUM2 50000
+#define QUANTUM3 50000
+#define QUANTUM4 50000
 
 void myfunction(int param){
 	int i = 2;
@@ -40,7 +40,8 @@ void myfunction(int param){
 
 int main(int argc, char const *argv[])
 {
-        struct timeval start, end, res;
+        struct timeval start, res;
+        struct timeval end[4];
         double t1, t2, t3, t4 = 0;
 	pid_t pid1, pid2, pid3, pid4;
 	int running1, running2, running3, running4;
@@ -85,10 +86,7 @@ int main(int argc, char const *argv[])
 	}
 	waitpid(pid1, &running1, WNOHANG);
 	if(running1 == 0){
-		gettimeofday(&end, NULL);
-        	timersub(&end, &start, &res);
-        	t1 = (res.tv_sec * 1000000 + res.tv_usec);
-        	t1 = t1/1000000;
+		gettimeofday(&end[0], NULL);
 	}
 		
 	if(running2 > 0){
@@ -98,10 +96,7 @@ int main(int argc, char const *argv[])
 	}
 	waitpid(pid2, &running2, WNOHANG);
 	if(running2 == 0){
-		gettimeofday(&end, NULL);
-        	timersub(&end, &start, &res);
-        	t2 = (res.tv_sec * 1000000 + res.tv_usec);
-        	t2 = t2/1000000;
+		gettimeofday(&end[1], NULL);
 	}
 	
 	if(running3 > 0){
@@ -111,10 +106,7 @@ int main(int argc, char const *argv[])
 	}
 	waitpid(pid3, &running3, WNOHANG);
 	if(running3 == 0){
-		gettimeofday(&end, NULL);
-        	timersub(&end, &start, &res);
-        	t3 = (res.tv_sec * 1000000 + res.tv_usec);
-        	t3 = t3/1000000;
+		gettimeofday(&end[2], NULL);
 	}
 	
 	if(running4 > 0){
@@ -124,49 +116,53 @@ int main(int argc, char const *argv[])
 	}
         waitpid(pid4, &running4, WNOHANG);
 	if(running4 == 0){
-		gettimeofday(&end, NULL);
-        	timersub(&end, &start, &res);
-        	t4 = (res.tv_sec * 1000000 + res.tv_usec);
-        	t4 = t4/1000000;
+		gettimeofday(&end[3], NULL);
 	}
 	
 	//Queue 2 - FCFS
 	if(running1 > 0){
 		kill(pid1, SIGCONT);
-		waitpid(pid1, &running1, 0);
-		gettimeofday(&end, NULL);
-        	timersub(&end, &start, &res);
-        	t1 = (res.tv_sec * 1000000 + res.tv_usec);
-        	t1 = t1/1000000;
+		while (running1) 
+                {
+        	      waitpid(pid1, &running1, 0);
+                }
+		gettimeofday(&end[0], NULL);;
 	}
 	if(running2 > 0){
 		kill(pid2, SIGCONT);
-		waitpid(pid2, &running2, 0);
-		gettimeofday(&end, NULL);
-        	timersub(&end, &start, &res);
-        	t2 = (res.tv_sec * 1000000 + res.tv_usec);
-        	t2 = t2/1000000;
+		while (running2) 
+                {
+        	      waitpid(pid2, &running2, 0);
+                }
+		gettimeofday(&end[1], NULL);
 	}
 	if(running3 > 0){
 		kill(pid3, SIGCONT);
-		waitpid(pid3, &running3, 0);
-		gettimeofday(&end, NULL);
-        	timersub(&end, &start, &res);
-        	t3 = (res.tv_sec * 1000000 + res.tv_usec);
-        	t3 = t3/1000000;
+		while (running3) 
+                {
+        	      waitpid(pid3, &running3, 0);
+                }
+		gettimeofday(&end[2], NULL);
 	}
 	if(running4 > 0){
 		kill(pid4, SIGCONT);
-		waitpid(pid4, &running4, 0);
-		gettimeofday(&end, NULL);
-        	timersub(&end, &start, &res);
-        	t4 = (res.tv_sec * 1000000 + res.tv_usec);
-        	t4 = t4/1000000;
+		while (running4) 
+                {
+        	      waitpid(pid4, &running4, 0);
+                }
+		gettimeofday(&end[3], NULL);
+        }
+    	double t[4] = {0,0,0,0};
+	for(int i=0; i<4; i++)
+	{
+          timersub(&end[i], &start, &res);
+          t[i] = (res.tv_sec * 1000000 + res.tv_usec);
+          t[i] = t[i]/1000000;
 	}
-    	double avg = (t1 + t2 + t3 + t4) / 4;
-    	//printf("time response for process 1: %f seconds\n", t1);
-    	//printf("time response for process 2: %f seconds\n", t2);
-    	//printf("time response for process 3: %f seconds\n", t3);
-    	//printf("time response for process 4: %f seconds\n", t4);
+    	double avg = (t[0] + t[1] + t[2] + t[3]) / 4;
+    	//printf("time response for process 1: %f seconds\n", t[0]);
+    	//printf("time response for process 2: %f seconds\n", t[1]);
+    	//printf("time response for process 3: %f seconds\n", t[2]);
+    	//printf("time response for process 4: %f seconds\n", t[3]);
     	printf("average time for all processes: %f seconds\n", avg);
 }
