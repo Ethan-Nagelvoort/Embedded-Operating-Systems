@@ -74,25 +74,25 @@ int main(int argc, char const *argv[])
 	//SJF scheduling starts here
 	gettimeofday(&start, NULL);
         kill(pid4, SIGCONT);
-        while (running4) 
+        while (running4>0) 
         {
         	waitpid(pid4, &running4, 0);
         }
         gettimeofday(&end[3], NULL);
         kill(pid3, SIGCONT);
-        while (running3) 
+        while (running3>0) 
         {
         	waitpid(pid3, &running3, 0);
         }
         gettimeofday(&end[2], NULL);
         kill(pid2, SIGCONT);
-        while (running2) 
+        while (running2>0) 
         {
         	waitpid(pid2, &running2, 0);
         }
         gettimeofday(&end[1], NULL);
         kill(pid1, SIGCONT);
-        while (running1) 
+        while (running1>0) 
         {
         	waitpid(pid1, &running1, 0);
         }
