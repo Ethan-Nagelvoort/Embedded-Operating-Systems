@@ -1,41 +1,34 @@
-﻿public class PageTable
+public class PageTable
 {
     //private int index; 
     //private PageEntry newp = new PageEntry();
     private PageEntry[] p = new PageEntry[128];
-    /*
-    public void setIndex(int index)
+    private int pageTableNum;
+
+    public void setPageTableNum(int pn)
     {
-        this.index = index;
+        this.pageTableNum = pn;
+    }
+    public int getpageTableNum()
+    {
+        return this.pageTableNum;
+    }
+    public PageEntry[] getp()
+    {
+        return this.p;
     }
 
-    public int getIndex()
+    public void setp(PageEntry[] pp)
     {
-        return this.index;
+        this.p = pp;
     }
-
-    public void setPageEntry(PageEntry newp)
-    {
-        this.newp = newp;
-    }
-
-    public PageEntry getPageEntry()
-    {
-        return this.newp;
-    }
-    */
-    public void EnterPage(int ind, PageEntry newp)
-    {
-        p[ind] = newp;
-    }
-
     public int Check(int ind, PageEntry newp)
     {
-       if(p[ind] == newp)
+        if (p[ind].getVPN() == newp.getVPN())
         {
             return 1;
         }
-       else
+        else
         {
             return 2;
         }
