@@ -19,7 +19,7 @@ public class MainMem
                 f++;
             }
         }
-        if(f==32)
+        if (f == 32)
         {
             return 1;
         }
