@@ -419,40 +419,40 @@ namespace PA4_571
                 {
                     Console.Write("RAND\n");
                     Console.Write("Number of Page Faults: {0}\n", countF);
-                    Console.Write("Number of Dirty References: {0}\n", countD);
-                    Console.Write("Number of Disk References: {0}\n", countR);
+                    Console.Write("Number of Dirty Page Writes: {0}\n", countD);
+                    Console.Write("Number of Disk Accesses: {0}\n", countR);
                     //Console.ReadLine();
                 }
                 if (repChoice == 2)
                 {
                     Console.Write("FIFO\n");
                     Console.Write("Number of Page Faults: {0}\n", countF);
-                    Console.Write("Number of Dirty References: {0}\n", countD);
-                    Console.Write("Number of Disk References: {0}\n", countR);
+                    Console.Write("Number of Dirty Page Writes: {0}\n", countD);
+                    Console.Write("Number of Disk Accesses: {0}\n", countR);
                     //Console.ReadLine();
                 }
                 if (repChoice == 3)
                 {
                     Console.Write("LRU\n");
                     Console.Write("Number of Page Faults: {0}\n", countF);
-                    Console.Write("Number of Dirty References: {0}\n", countD);
-                    Console.Write("Number of Disk References: {0}\n", countR);
+                    Console.Write("Number of Dirty Page Writes: {0}\n", countD);
+                    Console.Write("Number of Disk Accesses: {0}\n", countR);
                     Console.ReadLine();
                 }
                 if (repChoice == 4)
                 {
                     Console.Write("PER\n");
                     Console.Write("Number of Page Faults: {0}\n", countF);
-                    Console.Write("Number of Dirty References: {0}\n", countD);
-                    Console.Write("Number of Disk References: {0}\n", countR);
+                    Console.Write("Number of Dirty Page Writes: {0}\n", countD);
+                    Console.Write("Number of Disk Accesses: {0}\n", countR);
                     Console.ReadLine();
                 }
                 if (repChoice == 5)
                 {
                     Console.Write("OUR OWN ALGORITHM\n");
                     Console.Write("Number of Page Faults: {0}\n", countF);
-                    Console.Write("Number of Dirty References: {0}\n", countD);
-                    Console.Write("Number of Disk References: {0}\n", countR);
+                    Console.Write("Number of Dirty Page Writes: {0}\n", countD);
+                    Console.Write("Number of Disk Accesses: {0}\n", countR);
                     Console.ReadLine();
                 }
             }
