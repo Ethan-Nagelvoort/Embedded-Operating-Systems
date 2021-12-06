@@ -27,7 +27,7 @@ namespace PA4_571
                 Random r = new Random();
                 Console.Write("Enter 1 to read data1. Enter 2 to read data2.\n");
                 int choice = Convert.ToInt32(Console.ReadLine());
-                Console.Write("Enter 1 to use Rand.\nEnter 2 to use FIFO.\nEnter 3 to use LRU.\nEnter 4 to use PER.\nEnter 5 to use our own algorithm.\n");
+                Console.Write("Enter 1 to use Rand.\nEnter 2 to use FIFO.\nEnter 3 to use LRU.\nEnter 4 to use PER.\nEnter 5 to use OUR OWN ALGORITHM.\n");
                 int repChoice = Convert.ToInt32(Console.ReadLine());
                 //parse file into list of strings
                 string line = "";
@@ -332,9 +332,9 @@ namespace PA4_571
                             }
                             else//our own algorithm
                             {
-                                int pcount = count+1;
+                                int pcount = count;
                                 int flag = 0;
-                                while (flag == 0 && pcount<lines.Count)
+                                while (flag == 0 &&  pcount<lines.Count) //flag == 0 &&
                                 {
                                     string pline = lines[pcount];
                                     string[] pdata = pline.Split('\t');
@@ -347,11 +347,11 @@ namespace PA4_571
                                             mm.getMainMem()[i].incpc();
                                         }
                                     }
-                                    if(mm.checkPC()==1)
+                                    pcount++;
+                                    if(pcount == count+500)
                                     {
                                         flag = 1;
                                     }
-                                    pcount++;
                                 }
                                 int ind = 0;
                                 for(int i=0; i<32; i++)
