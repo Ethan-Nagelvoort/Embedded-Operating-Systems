@@ -7,7 +7,49 @@ using System.Threading.Tasks;
 public class MainMem
 {
     private PageEntry[] p = new PageEntry[32];
+    private int refCount;
 
+    public int checkPC()
+    {
+        int f = 0;
+        for (int i = 0; i < 32; i++)
+        {
+            if (p[i].getpc() > 0)
+            {
+                f++;
+            }
+        }
+        if(f==32)
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+    public int getRC()
+    {
+        return this.refCount;
+    }
+    public void setRC(int rc)
+    {
+        this.refCount = rc;
+    }
+    public void resetR()
+    {
+        if (this.refCount > 200)
+        {
+            for (int i = 0; i < 32; i++)
+            {
+                if (!(p[i] is null))
+                {
+                    this.p[i].setR(0);
+                }
+            }
+            this.refCount = 1;
+        }
+    }
     public int CheckEm()
     {
         int ch = 0;
