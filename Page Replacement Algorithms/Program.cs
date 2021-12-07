@@ -332,7 +332,7 @@ namespace PA4_571
                             }
                             else//our own algorithm
                             {
-                                int pcount = count;
+                                int pcount = count+1;
                                 int flag = 0;
                                 while (flag == 0 &&  pcount<lines.Count) //flag == 0 &&
                                 {
