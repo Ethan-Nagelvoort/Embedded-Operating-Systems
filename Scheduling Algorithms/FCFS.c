@@ -76,28 +76,16 @@ int main(int argc, char const *argv[])
 	running3 = 1;
 	running4 = 1;
         kill(pid1, SIGCONT);
-        while (running1>0) 
-        {
-        	waitpid(pid1, &running1, 0);
-        }
-        gettimeofday(&end[0], NULL);
+        waitpid(pid1, &running1, WNOHANG);
+	gettimeofday(&end[0], NULL);
         kill(pid2, SIGCONT);
-        while (running2>0) 
-        {
-                waitpid(pid2, &running2, 0);
-        }
+        waitpid(pid2, &running2, WNOHANG);
         gettimeofday(&end[1], NULL);
         kill(pid3, SIGCONT);
-        while (running3>0) 
-        {
-                waitpid(pid3, &running3, 0);
-        }
+        waitpid(pid3, &running3, WNOHANG);
         gettimeofday(&end[2], NULL);
         kill(pid4, SIGCONT);
-        while (running4>0) 
-        {
-                waitpid(pid4, &running4, 0);
-        }
+        waitpid(pid4, &running4, WNOHANG);
         gettimeofday(&end[3], NULL);
     	double t[4] = {0,0,0,0};
     	double avg = 0;
